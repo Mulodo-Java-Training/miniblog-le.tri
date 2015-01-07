@@ -1,4 +1,9 @@
-projectname-lastname.firstname
+miniblog-le.tri
 ==============================
 
-Template repo for Mulodo training. (ex: miniblog-truong.vu) 
+This is a miniblog use below FW:
++ Spring
++ Spring MVC
++ Hibernate
++ RestfulEasy
++ Bootstap
