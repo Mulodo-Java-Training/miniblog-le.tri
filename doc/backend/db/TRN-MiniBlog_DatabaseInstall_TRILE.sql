@@ -9,38 +9,45 @@ USE mini_blog;
 --
 SET NAMES utf8;
 
-
 -- drop before create table
-drop table if exists _comments;
-drop table if exists _posts;
-drop table if exists _tokens;
-drop table if exists _users;
+DROP TABLE IF EXISTS comments;
+DROP TABLE IF EXISTS posts;
+DROP TABLE IF EXISTS tokens;
+DROP TABLE IF EXISTS users;
 
-CREATE TABLE _comments (
+--
+-- 'comments' table structure
+--
+CREATE TABLE comments (
     id INTEGER NOT NULL AUTO_INCREMENT,
     content VARCHAR(256) NOT NULL,
     create_time TIMESTAMP NOT NULL,
     edit_time TIMESTAMP,
-    partner_id INTEGER NOT NULL,
+    comment_id INTEGER NOT NULL,
+    post_id INTEGER NOT NULL,
     user_id INTEGER NOT NULL,
     PRIMARY KEY (id)
 )  ENGINE=INNODB;
+
 --
--- '_posts' table structure
---;
-CREATE TABLE _posts (
+-- 'posts' table structure
+--
+CREATE TABLE posts (
     id INTEGER NOT NULL AUTO_INCREMENT,
-    content VARCHAR(1024) NOT NULL,
+    content TINYTEXT NOT NULL,
     create_time TIMESTAMP NOT NULL,
-    description VARCHAR(50) NOT NULL,
+    description VARCHAR(128) NOT NULL,
     edit_time TIMESTAMP,
+    public_time TIMESTAMP,
+    title VARCHAR(128) NOT NULL,
     user_id INTEGER NOT NULL,
     PRIMARY KEY (id)
 )  ENGINE=INNODB;
+
 --
--- '_posts' table structure
---;
-CREATE TABLE _tokens (
+-- 'tokens' table structure
+--
+CREATE TABLE tokens (
     id INTEGER NOT NULL AUTO_INCREMENT,
     create_time TIMESTAMP NOT NULL,
     expired_time TIMESTAMP NOT NULL,
@@ -48,22 +55,24 @@ CREATE TABLE _tokens (
     user_id INTEGER NOT NULL,
     PRIMARY KEY (id)
 )  ENGINE=INNODB;
+
 --
--- '_users' table structure
---;
-CREATE TABLE _users (
+-- 'users' table structure
+--
+CREATE TABLE users (
     id INTEGER NOT NULL AUTO_INCREMENT,
     avatar_link VARCHAR(256),
     first_name VARCHAR(64) NOT NULL,
-    join_date TIMESTAMP NOT NULL,
+    join_date DATE NOT NULL,
     last_name VARCHAR(64) NOT NULL,
     pass_hash VARCHAR(64) NOT NULL,
-    user_name VARCHAR(64) NOT NULL,
+    username VARCHAR(64) NOT NULL,
     PRIMARY KEY (id)
 )  ENGINE=INNODB;
 
 -- foreign key
-alter table _comments add index fk_comments_users (user_id), add constraint fk_comments_users foreign key (user_id) references _users (id);
-alter table _comments add index fk_comments_posts (partner_id), add constraint fk_comments_posts foreign key (partner_id) references _posts (id);
-alter table _posts add index fk_posts_users (user_id), add constraint fk_posts_users foreign key (user_id) references _users (id);
-alter table _tokens add index fk_tokens_users (user_id), add constraint fk_tokens_users foreign key (user_id) references _users (id);
+ALTER TABLE comments ADD INDEX fk_comments_users (user_id), ADD CONSTRAINT fk_comments_users FOREIGN KEY (user_id) REFERENCES users (id);
+ALTER TABLE comments ADD INDEX fk_comments_comments (comment_id), ADD CONSTRAINT fk_comments_comments FOREIGN KEY (comment_id) REFERENCES comments (id);
+ALTER TABLE comments ADD INDEX fk_comments_posts (post_id), ADD CONSTRAINT fk_comments_posts FOREIGN KEY (post_id) REFERENCES posts (id);
+ALTER TABLE posts ADD INDEX fk_posts_users (user_id), ADD CONSTRAINT fk_posts_users FOREIGN KEY (user_id) REFERENCES users (id);
+ALTER TABLE tokens ADD INDEX fk_tokens_users (user_id), ADD CONSTRAINT fk_tokens_users FOREIGN KEY (user_id) REFERENCES users (id);
