@@ -81,7 +81,7 @@ public class UserController {
             // Log
             logger.info("Username [{}] existed", username);
 
-            ResultMessage errorMsg = new ResultMessage<User>(1001, "Username existed",
+            ResultMessage errorMsg = new ResultMessage(1001, "Username existed",
                     "Username existed");
 
             return Response.status(400).entity(errorMsg).build();
@@ -143,7 +143,7 @@ public class UserController {
         if (!tokenSer.checkToken(user_id, token)) {
             ResultMessage unauthorizedMsg = new ResultMessage(1001,
                     "Token in request invaild or expired", String.format(
-                            "Token %s invaild or expired", token));
+                            "Token [%s] invaild or expired", token));
             return Response.status(401).entity(unauthorizedMsg).build();
         }
 
@@ -165,7 +165,7 @@ public class UserController {
         }
 
         // Response success
-        ResultMessage<User> successMsg = new ResultMessage<User>(1, "Account updated success!",
+        ResultMessage<User> successMsg = new ResultMessage<User>(200, "Account updated success!",
                 user);
         return Response.status(200).entity(successMsg).build();
     }
@@ -223,10 +223,10 @@ public class UserController {
     @Path(Contants.URL_CHPWD)
     @PUT
     public Response changePassword(
-                @NotNull(message = "{user_id.NotNull}")
-                @FormParam(value = "user_id")
-                @Min(value = 0)
-                Integer user_id,
+                    @NotNull(message = "{user_id.NotNull}")
+                    @FormParam(value = "user_id")
+                    @Min(value = 0)
+                    Integer user_id,
 
                     @NotNull(message = "{password.NotNull}")
                     @Size(min = 4, max = 999, message = "{password.Size}")
