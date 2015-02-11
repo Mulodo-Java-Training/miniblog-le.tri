@@ -43,6 +43,12 @@ public class TokenController {
     @Autowired
     TokenService tokenSer;
 
+    /**
+     * Create new token and response to user if input username and password valid
+     * @param username
+     * @param password
+     * @return Response to client
+     */
     @SuppressWarnings("rawtypes")
     @Path(Contants.URL_LOGIN)
     @POST
@@ -61,6 +67,7 @@ public class TokenController {
 
         User userInfo = userSer.checkPasswordGetUserInfo(username, password);
         if (null == userInfo) {
+            // Response username or password invalid
             ResultMessage errorMsg = new ResultMessage(1002,
                     "Login with username or password invalid", "User id or password invalid");
             return Response.status(401).entity(errorMsg).build();
@@ -70,7 +77,7 @@ public class TokenController {
         try {
             token = tokenSer.login(userInfo);
         } catch (HibernateException e) {
-            // Response error
+            // Response db error
             ResultMessage dbErrMsg = new ResultMessage(9001, "Database access error",
                     String.format("Database error: %s", e.getMessage()));
             return Response.status(500).entity(dbErrMsg).build();
@@ -81,6 +88,12 @@ public class TokenController {
         return Response.status(200).entity(successMsg).build();
     }
 
+    /**
+     * Delete valid token in Db
+     * 
+     * @param token
+     * @return Response to client
+     */
     @Path(Contants.URL_LOGOUT)
     @POST
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
@@ -107,7 +120,7 @@ public class TokenController {
             return Response.status(200).entity(successMsg).build();
         }
 
-        // Response error
+        // Response token invalid or expired
         ResultMessage unauthorizedMsg = new ResultMessage(1001,
                 "Token in request invaild or expired", String.format("Token [%s] invaild or expired",
                         token));
