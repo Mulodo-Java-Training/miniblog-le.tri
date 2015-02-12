@@ -10,7 +10,8 @@ import com.mulodo.miniblog.pojo.Post;
 /**
  * @author TriLe
  */
-public interface PostService extends CommonService<Post> {
+public interface PostService extends CommonService<Post>
+{
 
     /**
      * Search in title, description and content contain query string

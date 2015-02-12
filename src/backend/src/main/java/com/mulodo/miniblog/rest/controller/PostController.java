@@ -38,9 +38,10 @@ import com.mulodo.miniblog.service.TokenService;
 @Path(Contants.URL_POST)
 @Produces(MediaType.APPLICATION_JSON)
 @ValidateRequest
-public class PostController {
+public class PostController
+{
     private static final Logger logger = LoggerFactory.getLogger(PostController.class);
-    
+
     @Autowired
     private TokenService tokenSer;
     @Autowired
@@ -62,7 +63,7 @@ public class PostController {
 
             @NotNull(message = "{title.NotNull}")
             @Size(min = 1, max = 128, message = "{title.Size}")
-            @FormParam(value = "title")
+            @FormParam(value = "title") 
             String title,
 
             @NotNull(message = "{description.NotNull}")
@@ -73,7 +74,8 @@ public class PostController {
             @NotNull(message = "{content.NotNull}")
             @Size(min = 1, max = 8192, message = "{content.Size}")
             @FormParam(value = "content")
-            String content) {
+            String content)
+    {
 
         // Check token
         if (!tokenSer.checkToken(user_id, token)) {
@@ -110,51 +112,59 @@ public class PostController {
     @Path(Contants.URL_UPDATE)
     @PUT
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    public Response update(@FormParam("token") String token) {
+    public Response update(@FormParam("token") String token)
+    {
         return Response.status(200).build();
     }
 
     @Path(Contants.URL_DELETE)
     @DELETE
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    public Response delete(@FormParam("token") String token) {
+    public Response delete(@FormParam("token") String token)
+    {
         return Response.status(200).build();
     }
 
     @Path(Contants.URL_PUBLICT)
     @PUT
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    public Response activeDeactive(@FormParam("token") String token) {
+    public Response activeDeactive(@FormParam("token") String token)
+    {
         return Response.status(200).build();
     }
 
     @Path(Contants.URL_GET)
     @GET
-    public Response allPost() {
+    public Response allPost()
+    {
         return Response.status(200).build();
     }
 
     @Path(Contants.URL_TOP)
     @GET
-    public Response topPost() {
+    public Response topPost()
+    {
         return Response.status(200).build();
     }
 
     @Path(Contants.URL_TOP)
     @GET
-    public Response getById(@FormParam("token") String token) {
+    public Response getById(@FormParam("token") String token)
+    {
         return Response.status(200).build();
     }
 
     @Path(Contants.URL_GET_BY_USER)
     @GET
-    public Response getByUser(@PathParam("user_id") int UserID) {
+    public Response getByUser(@PathParam("user_id") int UserID)
+    {
         return Response.status(200).build();
     }
 
     @Path(Contants.URL_SEARCH)
     @GET
-    public Response search(@PathParam("query") String query) {
+    public Response search(@PathParam("query") String query)
+    {
         return Response.status(200).build();
     }
 }

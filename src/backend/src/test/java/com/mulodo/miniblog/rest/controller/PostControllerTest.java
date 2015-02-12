@@ -35,7 +35,8 @@ import com.mulodo.miniblog.service.UserService;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath*:applicationContext.xml")
-public class PostControllerTest {
+public class PostControllerTest
+{
 
     @Autowired
     private UserService userSer;
@@ -49,14 +50,16 @@ public class PostControllerTest {
     String POST_URL = ROOT_URL + Contants.URL_POST;
 
     @Before
-    public void prepareData() {
+    public void prepareData()
+    {
         // Delete all data
         postSer.deleteAll();
         tokenSer.deleteAll();
         userSer.deleteAll();
     }
 
-    private Token createDummyData() {
+    private Token createDummyData()
+    {
         // Create user
         User user = new User();
         user = new User();
@@ -71,7 +74,8 @@ public class PostControllerTest {
 
     // Normal case
     @Test
-    public void testAddPost() {
+    public void testAddPost()
+    {
         Token token = createDummyData();
 
         // Create new post
@@ -105,7 +109,8 @@ public class PostControllerTest {
 
     // Miss user_id
     @Test
-    public void testAddPost1() {
+    public void testAddPost1()
+    {
         Token token = createDummyData();
 
         // Create new post
@@ -136,7 +141,8 @@ public class PostControllerTest {
 
     // Miss token
     @Test
-    public void testAddPost2() {
+    public void testAddPost2()
+    {
         Token token = createDummyData();
 
         // Create new post
@@ -167,7 +173,8 @@ public class PostControllerTest {
 
     // Miss title
     @Test
-    public void testAddPost3() {
+    public void testAddPost3()
+    {
         Token token = createDummyData();
 
         // Create new post
@@ -198,7 +205,8 @@ public class PostControllerTest {
 
     // Miss description
     @Test
-    public void testAddPost4() {
+    public void testAddPost4()
+    {
         Token token = createDummyData();
 
         // Create new post
@@ -229,7 +237,8 @@ public class PostControllerTest {
 
     // Miss content
     @Test
-    public void testAddPost5() {
+    public void testAddPost5()
+    {
         Token token = createDummyData();
 
         // Create new post
@@ -260,7 +269,8 @@ public class PostControllerTest {
 
     // Token invalid
     @Test
-    public void testAddPost6() {
+    public void testAddPost6()
+    {
         Token token = createDummyData();
 
         // Create new post

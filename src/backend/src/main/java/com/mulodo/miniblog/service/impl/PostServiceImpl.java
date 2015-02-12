@@ -19,7 +19,8 @@ import com.mulodo.miniblog.service.UserService;
  * @author TriLe
  */
 @Service
-public class PostServiceImpl implements PostService {
+public class PostServiceImpl implements PostService
+{
 
     @Autowired
     private PostDAO postDAO;
@@ -31,7 +32,8 @@ public class PostServiceImpl implements PostService {
      */
     @Override
     @Transactional
-    public Post add(Post post) {
+    public Post add(Post post)
+    {
         // Get user of post
         User user = userSer.get(post.getUserId());
         // Set referent to create Fk
@@ -46,7 +48,8 @@ public class PostServiceImpl implements PostService {
      */
     @Override
     @Transactional
-    public Post update(Post entity) {
+    public Post update(Post entity)
+    {
         // TODO Auto-generated method stub
         return null;
     }
@@ -56,7 +59,8 @@ public class PostServiceImpl implements PostService {
      */
     @Override
     @Transactional
-    public void delete(Post entity) {
+    public void delete(Post entity)
+    {
         // TODO Auto-generated method stub
 
     }
@@ -66,17 +70,8 @@ public class PostServiceImpl implements PostService {
      */
     @Override
     @Transactional
-    public Post load(int id) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    @Transactional
-    public Post get(int id) {
+    public Post load(int id)
+    {
         // TODO Auto-generated method stub
         return null;
     }
@@ -86,7 +81,19 @@ public class PostServiceImpl implements PostService {
      */
     @Override
     @Transactional
-    public void deleteAll() {
+    public Post get(int id)
+    {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @Transactional
+    public void deleteAll()
+    {
         postDAO.deleteAll();
     }
 
@@ -95,7 +102,8 @@ public class PostServiceImpl implements PostService {
      */
     @Override
     @Transactional(readOnly = true)
-    public List<Post> search(String query) {
+    public List<Post> search(String query)
+    {
         // TODO Auto-generated method stub
         return null;
     }
