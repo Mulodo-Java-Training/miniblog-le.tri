@@ -290,56 +290,56 @@ public class User implements Comparable<User> {
         if (this == obj)
             return true;
         if (obj == null) {
-            System.out.println("null");
+            // System.out.println("null");
             return false;
         }
         if (getClass() != obj.getClass()) {
-            System.out.println("class");
+            // System.out.println("class");
             return false;
         }
         User other = (User) obj;
         if (avatarLink == null) {
             if (other.avatarLink != null) {
-                System.out.println("avatarLink");
+                // System.out.println("avatarLink");
                 return false;
             }
         } else if (!avatarLink.equals(other.avatarLink)) {
-            System.out.println("avatarLink");
+            // System.out.println("avatarLink");
             return false;
         }
         if (firstName == null) {
             if (other.firstName != null)
-                System.out.println("firstName");
+                // System.out.println("firstName");
             return false;
         } else if (!firstName.equals(other.firstName)) {
-            System.out.println("firstName");
+            // System.out.println("firstName");
             return false;
         }
         if (joinDate == null) {
             if (other.joinDate != null) {
-                System.out.println("joinDate");
+                // System.out.println("joinDate");
                 return false;
             }
         } else if (!joinDate.equals(other.joinDate)) {
-            System.out.println("joinDate");
+            // System.out.println("joinDate");
             return false;
         }
         if (lastName == null) {
             if (other.lastName != null) {
-                System.out.println("lastName");
+                // System.out.println("lastName");
                 return false;
             }
         } else if (!lastName.equals(other.lastName)) {
-            System.out.println("lastName");
+            // System.out.println("lastName");
             return false;
         }
         if (userName == null) {
             if (other.userName != null) {
-                System.out.println("userName");
+                // System.out.println("userName");
                 return false;
             }
         } else if (!userName.equals(other.userName)) {
-            System.out.println("userName");
+            // System.out.println("userName");
             return false;
         }
         return true;
