@@ -35,13 +35,14 @@ import com.mulodo.miniblog.service.UserService;
 @Controller
 @Path(Contants.URL_TOKEN)
 @Produces(MediaType.APPLICATION_JSON)
+@ValidateRequest
 public class TokenController {
     private static final Logger logger = LoggerFactory.getLogger(TokenController.class);
 
     @Autowired
-    UserService userSer;
+    private UserService userSer;
     @Autowired
-    TokenService tokenSer;
+    private TokenService tokenSer;
 
     /**
      * Create new token and response to user if input username and password valid
@@ -53,7 +54,6 @@ public class TokenController {
     @Path(Contants.URL_LOGIN)
     @POST
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    @ValidateRequest
     public Response userLogin(
             @NotNull(message = "{username.NotNull}")
             @Pattern(regexp = Contants.WORDS_VALID_REGEX, message = "{username.Invalid}")
@@ -97,7 +97,6 @@ public class TokenController {
     @Path(Contants.URL_LOGOUT)
     @POST
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    @ValidateRequest
     public Response userLogout(
             @NotNull(message = "{token.NotNull}")
             @Size(min = 64, max = 64, message = "{token.Size}")
