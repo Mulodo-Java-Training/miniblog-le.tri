@@ -3,8 +3,11 @@
  */
 package com.mulodo.miniblog.service.impl;
 
+import java.sql.Timestamp;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,6 +24,7 @@ import com.mulodo.miniblog.service.UserService;
 @Service
 public class PostServiceImpl implements PostService
 {
+    private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
     @Autowired
     private PostDAO postDAO;
@@ -72,8 +76,7 @@ public class PostServiceImpl implements PostService
     @Transactional
     public Post load(int id)
     {
-        // TODO Auto-generated method stub
-        return null;
+        return postDAO.load(id);
     }
 
     /**
@@ -83,8 +86,7 @@ public class PostServiceImpl implements PostService
     @Transactional
     public Post get(int id)
     {
-        // TODO Auto-generated method stub
-        return null;
+        return postDAO.get(id);
     }
 
     /**
@@ -106,6 +108,39 @@ public class PostServiceImpl implements PostService
     {
         // TODO Auto-generated method stub
         return null;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @Transactional
+    public Post activeDeactive(int post_id, boolean activeFlg)
+    {
+        // Get post
+        Post post = get(post_id);
+
+        if (null == post) {
+            logger.warn("Post with id ={} does not exist", post_id);
+            return null;
+        }
+
+        // If activeFlg = TRUE and post not publicized then change Db
+        if (activeFlg && null == post.getPublicTime()) {
+            post.setPublicTime(new Timestamp(System.currentTimeMillis()));
+
+            // Update Db
+            post = postDAO.update(post);
+
+            // If activeFlg = FALSE and post publicized then change
+        } else if (!activeFlg && null != post.getPublicTime()) {
+            post.setPublicTime(null);
+
+            // Update Db
+            post = postDAO.update(post);
+        }
+
+        return post;
     }
 
 }
