@@ -22,4 +22,16 @@ public interface PostService extends CommonService<Post>
      */
     List<Post> search(String query);
 
+    /**
+     * Active/Deactive post
+     * 
+     * @param post_id
+     *            Id of post
+     * @param activeFlg
+     *            <b>TRUE</b> Active post<br>
+     *            <b>FALSE</b> Deactive post
+     * @return Post info
+     */
+    Post activeDeactive(int post_id, boolean activeFlg);
+
 }
