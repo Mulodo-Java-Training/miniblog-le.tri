@@ -39,9 +39,15 @@ public class PostServiceImpl implements PostService
     public Post add(Post post)
     {
         // Get user of post
-        User user = userSer.get(post.getUserId());
-        // Set referent to create Fk
-        post.setUser(user);
+        User user = null;
+
+        // If setted user then not get from Db
+        // Else setted userId then get from Db
+        if (null == post.getUser()) {
+            user = userSer.get(post.getUserId());
+            // Set referent to create Fk
+            post.setUser(user);
+        }
 
         // Add to Db and return
         return postDAO.add(post);
