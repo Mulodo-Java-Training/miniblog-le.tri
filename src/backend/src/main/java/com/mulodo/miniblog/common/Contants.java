@@ -20,7 +20,7 @@ public class Contants
 
     public static final String URL_ADD = "/";
     public static final String URL_UPDATE = "/";
-//    public static final String URL_DELETE = "/{post_id}/{user_id}/{token}";
+    // public static final String URL_DELETE = "/{post_id}/{user_id}/{token}";
     public static final String URL_DELETE = "/";
     public static final String URL_GET = "/";
     public static final String URL_SEARCH = "/search/{query}";
@@ -64,11 +64,11 @@ public class Contants
     public static final String MSG_CHANGE_PWD_SCC = "Change password success!";
     public static final String MSG_LOGIN_SCC = "Login success!";
     public static final String MSG_LOGOUT_SCC = "Logout success!";
-    public static final String MSG_CREATE_POST_SCC ="Create post success!";
+    public static final String MSG_CREATE_POST_SCC = "Create post success!";
     public static final String MSG_UPDATE_POST_SCC = "Update post success!";
     public static final String MSG_ACT_DEACT_SCC = "Active/Deactive post success!";
+    public static final String FOR_GET_ALL_POST_SCC = "Get all posts success! %d results";
     public static final String MSG_DELETE_POST_SCC = "Delete post success!";
-
 
     public static final int CODE_INPUT_ERR = 1;
     public static final int CODE_OK = 200;

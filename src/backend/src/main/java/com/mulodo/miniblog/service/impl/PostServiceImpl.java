@@ -197,4 +197,11 @@ public class PostServiceImpl implements PostService
         return postDAO.checkOwner(postId, userId);
     }
 
+    @Transactional(readOnly = true)
+    @Override
+    public List<Post> allPost()
+    {
+        return postDAO.list();
+    }
+
 }
