@@ -102,10 +102,15 @@ public class PostServiceImpl implements PostService
      */
     @Override
     @Transactional
-    public void delete(Post entity)
+    public boolean delete(Post deletePost)
     {
-        // TODO Auto-generated method stub
-
+        // Get post from Db to delete
+        Post post = get(deletePost.getId());
+        if (null != post) {
+            postDAO.delete(post);
+            return true;
+        }
+        return false;
     }
 
     /**
