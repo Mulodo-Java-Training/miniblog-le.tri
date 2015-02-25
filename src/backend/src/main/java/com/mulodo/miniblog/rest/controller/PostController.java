@@ -257,7 +257,6 @@ public class PostController
         post.setId(post_id);
 
         // Call service to delete from Db
-        boolean deleteStatus;
         try {
             deleteStatus = postSer.delete(post);
         } catch (HibernateException e) {
@@ -269,14 +268,6 @@ public class PostController
             return Response.status(Contants.CODE_INTERNAL_ERR).entity(dbErrMsg).build();
         }
 
-        // Check post exist
-        if (!deleteStatus) {
-            logger.warn("Post does not exist");
-            ResultMessage postErrMsg = new ResultMessage(Contants.CODE_POST_NOT_EXIST,
-                    Contants.MSG_POST_NOT_EXIST,
-                    String.format(Contants.FOR_POST_NOT_EXIST, post_id));
-            return Response.status(Contants.CODE_BAD_REQUEST).entity(postErrMsg).build();
-        }
         // Response success
         ResultMessage result = new ResultMessage(Contants.CODE_OK, Contants.MSG_DELETE_POST_SCC);
         return Response.status(Contants.CODE_OK).entity(result).build();
