@@ -102,15 +102,13 @@ public class PostServiceImpl implements PostService
      */
     @Override
     @Transactional
-    public boolean delete(Post deletePost)
+    public void delete(Post deletePost)
     {
         // Get post from Db to delete
         Post post = get(deletePost.getId());
         if (null != post) {
             postDAO.delete(post);
-            return true;
         }
-        return false;
     }
 
     /**

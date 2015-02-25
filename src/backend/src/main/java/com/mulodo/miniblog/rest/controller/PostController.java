@@ -200,15 +200,6 @@ public class PostController
             return Response.status(Contants.CODE_INTERNAL_ERR).entity(dbErrMsg).build();
         }
 
-        // Check post exist
-        if (null == post) {
-            logger.warn("Post does not exist");
-            ResultMessage postErrMsg = new ResultMessage(Contants.CODE_POST_NOT_EXIST,
-                    Contants.MSG_POST_NOT_EXIST,
-                    String.format(Contants.FOR_POST_NOT_EXIST, post_id));
-            return Response.status(Contants.CODE_BAD_REQUEST).entity(postErrMsg).build();
-        }
-
         // Response success
         ResultMessage<Post> result = new ResultMessage<Post>(Contants.CODE_OK,
                 Contants.MSG_UPDATE_POST_SCC, post);
@@ -261,7 +252,6 @@ public class PostController
         post.setId(post_id);
 
         // Call service to delete from Db
-        boolean deleteStatus;
         try {
             deleteStatus = postSer.delete(post);
         } catch (HibernateException e) {
@@ -273,14 +263,6 @@ public class PostController
             return Response.status(Contants.CODE_INTERNAL_ERR).entity(dbErrMsg).build();
         }
 
-        // Check post exist
-        if (!deleteStatus) {
-            logger.warn("Post does not exist");
-            ResultMessage postErrMsg = new ResultMessage(Contants.CODE_POST_NOT_EXIST,
-                    Contants.MSG_POST_NOT_EXIST,
-                    String.format(Contants.FOR_POST_NOT_EXIST, post_id));
-            return Response.status(Contants.CODE_BAD_REQUEST).entity(postErrMsg).build();
-        }
         // Response success
         ResultMessage result = new ResultMessage(Contants.CODE_OK, Contants.MSG_DELETE_POST_SCC);
         return Response.status(Contants.CODE_OK).entity(result).build();
@@ -341,15 +323,6 @@ public class PostController
             ResultMessage dbErrMsg = new ResultMessage(Contants.CODE_DB_ERR, Contants.MSG_DB_ERR,
                     String.format(Contants.FOR_DB_ERR, e.getMessage()));
             return Response.status(Contants.CODE_INTERNAL_ERR).entity(dbErrMsg).build();
-        }
-
-        // Check post exist
-        if (null == post) {
-            logger.warn("Post does not exist");
-            ResultMessage postErrMsg = new ResultMessage(Contants.CODE_POST_NOT_EXIST,
-                    Contants.MSG_POST_NOT_EXIST,
-                    String.format(Contants.FOR_POST_NOT_EXIST, post_id));
-            return Response.status(Contants.CODE_BAD_REQUEST).entity(postErrMsg).build();
         }
 
         // Response success
