@@ -3,6 +3,8 @@
  */
 package com.mulodo.miniblog.service;
 
+import java.util.List;
+
 /**
  * @author TriLe
  */
@@ -50,4 +52,9 @@ public interface CommonService<T>
      * Delete all rows in table
      */
     void deleteAll();
+
+    /**
+     * @return All entity in Db
+     */
+    List<T> list();
 }
