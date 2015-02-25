@@ -3,6 +3,8 @@
  */
 package com.mulodo.miniblog.rest.controller;
 
+import java.util.List;
+
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -323,11 +325,27 @@ public class PostController
         return Response.status(Contants.CODE_OK).entity(result).build();
     }
 
+    @SuppressWarnings("rawtypes")
     @Path(Contants.URL_GET)
     @GET
     public Response allPost()
     {
-        return Response.status(200).build();
+        List<Post> posts = null;
+        // Call service to get all public post from Db
+        try {
+            posts = postSer.allPost();
+        } catch (HibernateException e) {
+            // Log
+            logger.warn(Contants.MSG_DB_ERR, e);
+            // Response error
+            ResultMessage dbErrMsg = new ResultMessage(Contants.CODE_DB_ERR, Contants.MSG_DB_ERR,
+                    String.format(Contants.FOR_DB_ERR, e.getMessage()));
+            return Response.status(Contants.CODE_INTERNAL_ERR).entity(dbErrMsg).build();
+        }
+        // Response success
+        ResultMessage<List<Post>> result = new ResultMessage<List<Post>>(Contants.CODE_OK,
+                String.format(Contants.FOR_GET_ALL_POST_SCC, posts.size()), posts);
+        return Response.status(Contants.CODE_OK).entity(result).build();
     }
 
     @Path(Contants.URL_TOP)
