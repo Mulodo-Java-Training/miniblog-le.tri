@@ -253,7 +253,7 @@ public class PostController
 
         // Call service to delete from Db
         try {
-            deleteStatus = postSer.delete(post);
+            postSer.delete(post);
         } catch (HibernateException e) {
             // Log
             logger.warn(Contants.MSG_DB_ERR, e);
