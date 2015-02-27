@@ -74,7 +74,7 @@ public class Comment
     private Comment parent;
 
     @OneToMany(mappedBy = "parent", targetEntity = Comment.class)
-    @Cascade(CascadeType.SAVE_UPDATE)
+    @Cascade(CascadeType.ALL)
     @JsonIgnore
     private Set<Comment> comments;
 
