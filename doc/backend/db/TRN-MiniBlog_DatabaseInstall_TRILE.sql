@@ -23,7 +23,7 @@ CREATE TABLE comments (
     content VARCHAR(256) NOT NULL,
     create_time TIMESTAMP NOT NULL,
     edit_time TIMESTAMP,
-    comment_id INTEGER NOT NULL,
+    pcomment_id INTEGER,
     post_id INTEGER NOT NULL,
     user_id INTEGER NOT NULL,
     PRIMARY KEY (id)
@@ -72,7 +72,7 @@ CREATE TABLE users (
 
 -- foreign key
 ALTER TABLE comments ADD INDEX fk_comments_users (user_id), ADD CONSTRAINT fk_comments_users FOREIGN KEY (user_id) REFERENCES users (id);
-ALTER TABLE comments ADD INDEX fk_comments_comments (comment_id), ADD CONSTRAINT fk_comments_comments FOREIGN KEY (comment_id) REFERENCES comments (id);
+ALTER TABLE comments ADD INDEX fk_comments_comments (pcomment_id), ADD CONSTRAINT fk_comments_comments FOREIGN KEY (pcomment_id) REFERENCES comments (id);
 ALTER TABLE comments ADD INDEX fk_comments_posts (post_id), ADD CONSTRAINT fk_comments_posts FOREIGN KEY (post_id) REFERENCES posts (id);
 ALTER TABLE posts ADD INDEX fk_posts_users (user_id), ADD CONSTRAINT fk_posts_users FOREIGN KEY (user_id) REFERENCES users (id);
 ALTER TABLE tokens ADD INDEX fk_tokens_users (user_id), ADD CONSTRAINT fk_tokens_users FOREIGN KEY (user_id) REFERENCES users (id);
