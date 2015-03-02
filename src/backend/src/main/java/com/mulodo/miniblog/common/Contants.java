@@ -37,6 +37,8 @@ public class Contants
     public static final String URL_PUBLICT = "/pub";
     public static final String URL_TOP = "/top";
     public static final String URL_GET_BY_USER = "/users/{user_id:[0-9]+}";
+    public static final String URL_GET_BY_POST = "/posts/{post_id:[0-9]+}";
+
 
     public static final String URL_COMMENT = "/comments";
 
@@ -71,6 +73,7 @@ public class Contants
     public static final String MSG_UPDATE_POST_SCC = "Update post success!";
     public static final String MSG_ACT_DEACT_SCC = "Active/Deactive post success!";
     public static final String FOR_GET_ALL_POST_SCC = "Get all posts success! %d results";
+    public static final String FOR_GET_ALL_COMMENT_SCC = "Get all comments success! %d results";
     public static final String MSG_DELETE_POST_SCC = "Delete post success!";
     public static final String MSG_CREATE_COMMENT_SCC = "Create comment success!";
     public static final String MSG_UPDATE_COMMENT_SCC = "Update comment success!";
