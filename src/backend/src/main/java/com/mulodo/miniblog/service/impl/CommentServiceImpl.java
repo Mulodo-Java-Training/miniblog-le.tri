@@ -201,4 +201,16 @@ public class CommentServiceImpl implements CommentService
     {
         return commentDAO.list();
     }
+
+    /**
+     * {@inheritDoc}
+     * 
+     * @throws HibernateException Have a error to access Db
+     */
+    @Transactional(readOnly = true)
+    @Override
+    public List<Comment> getByPostId(int postId)
+    {
+        return commentDAO.getByPostId(postId);
+    }
 }
