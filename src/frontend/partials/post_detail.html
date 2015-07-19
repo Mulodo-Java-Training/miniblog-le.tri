@@ -1,0 +1,98 @@
+<!-- navigation -->
+<div ng-include="'partials/right-nav.html'"
+	class="col-md-3 col-md-push-9 logged"></div>
+
+<!-- main contain -->
+<div class="col-md-9 col-md-pull-3">
+	<!-- post contain -->
+	<div class="panel panel-default">
+		<div class="panel-body">
+			<div class="media">
+				<div class="media-left">
+					<a ng-href="#/users/{{post.user_id}}"> <img
+						ng-src="{{users[post.user_id].avatarlink}}"
+						class="media-object avatar">
+					</a>
+				</div>
+				<div class="media-body">
+
+					<!-- post title -->
+					<div class="row" ng-include="'partials/post_title.html'"></div>
+					<!-- /post title -->
+
+					<p>
+						<span class="glyphicon glyphicon-time"></span> Created on
+						{{post.create_time}} by <a ng-href="#/users/{{post.user_id}}">{{users[post.user_id].username}}</a>
+					</p>
+				</div>
+				<hr>
+				<p id="description">{{post.description}}</p>
+				<!-- 				<hr>
+				<p>{{post.content}}</p> -->
+				<hr>
+				<p ng-bind-html="contentMarkup"></p>
+			</div>
+		</div>
+	</div>
+
+	<!-- .post contain -->
+	<div class="panel panel-default"
+		ng-if="!previewFlg && (isLogged || comments)">
+		<div class="panel-body">
+
+			<!-- list comments -->
+			<div ng-repeat="comment in comments">
+				<div class="media">
+					<a class="pull-left" ng-href="#/users/{{comment.user_id}}"> <img
+						class="media-object avatar"
+						ng-src="{{users[comment.user_id].avatarlink}}">
+					</a>
+					<div class="media-body">
+						<div class="row">
+							<div class="col-xs-9">
+								<h4 class="media-heading">{{users[comment.user_id].username}}</h4>
+							</div>
+
+							<div class="col-xs-3"
+								ng-if="comment.user_id == currentUser.user_id">
+								<div class="owner-control">
+									<a ng-click="deleteComment(comment.comment_id, $index)"><span
+										class="glyphicon glyphicon-trash pull-right nav-icon"></span></a>
+									<a ng-click="showCommentEditBox(comment.content, $index)"><span
+										class="glyphicon glyphicon-pencil pull-right nav-icon"></span></a>
+								</div>
+							</div>
+
+						</div>
+
+						<p>
+							<span class="glyphicon glyphicon-time nav-icon"></span>Created on
+							{{comment.create_time}}
+						</p>
+						<span ng-if="$index != editIdx" span>{{comment.content}}</span>
+						<textarea class="form-control" rows="1" ng-if="$index == editIdx"
+							ng-keypress="$event.keyCode == 13 && editComment($index, commentEditContent)"
+							ng-model="commentEditContent""></textarea>
+					</div>
+				</div>
+				<hr>
+			</div>
+			<!-- .list comments -->
+
+			<!-- add new comment -->
+			<div class="well" ng-if="isLogged">
+				<h4>Leave a Comment:</h4>
+				<form role="form">
+					<div class="form-group">
+
+						<textarea class="form-control" rows="1" id="commentTextArea"
+							ng-keypress="$event.keyCode == 13 && addComment(post.post_id, commentNewContent)"
+							ng-model="commentNewContent"></textarea>
+
+					</div>
+				</form>
+			</div>
+			<!-- .add new comment -->
+		</div>
+	</div>
+</div>

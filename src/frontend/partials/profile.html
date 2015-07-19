@@ -1,0 +1,54 @@
+<div class="col-md-8 col-md-offset-2">
+	<div class="panel panel-default">
+		<div class="panel-body">
+			<!-- form -->
+			<form class="form form-register" ng-submit="editProfile(user)"
+				name="profileForm">
+				<h2 align="center" class="form-heading">Edit profile</h2>
+				<label for="inputUsername" class="sr-only">Username</label> <input
+					id="inputUsername" class="form-control" placeholder="Username"
+					required="true" autofocus="true" ng-model="user.username" disabled>
+
+				<div class="row" style="margin: -15px -15px;">
+					<div class="col-md-6">
+						<label for="inputFirstname" class="sr-only">Firstname</label> <input
+							id="inputFirstname" class="form-control" placeholder="Firstname"
+							required="true" autofocus="false" ng-model="user.firstname">
+					</div>
+					<div class="col-md-6">
+						<label for="inputLastname" class="sr-only">Lastname</label> <input
+							id="inputLastname" class="form-control" placeholder="Lastname"
+							required="true" autofocus="false" ng-model="user.lastname">
+					</div>
+				</div>
+
+				<!-- current avatar -->
+				<div align="center" ng-if="currentAvatarlink">
+					<p>Current avatar</p>
+					<img data-holder-rendered="true" ng-src="{{currentAvatarlink}}"
+						class="media-object avatar">
+				</div>
+				<!-- .current avatar -->
+
+				<!-- upload element -->
+				<input id="fileUploader" name="uploadedFile" type="file"
+					accept="image/*">
+				<!-- .upload element -->
+
+				<!-- 				<a class="btn btn-lg btn-primary btn-block" href="#/change_password">Change
+					password</a> -->
+
+				<div class="row">
+					<div class="col-md-6">
+						<a class="btn btn-lg btn-primary btn-block" href="#/">Cancel</a>
+					</div>
+					<div class="col-md-6">
+						<button class="btn btn-lg btn-primary btn-block" type="submit"
+							ng-disabled="!profileForm.$valid">Edit</button>
+					</div>
+				</div>
+			</form>
+			<!-- .form -->
+		</div>
+	</div>
+</div>
